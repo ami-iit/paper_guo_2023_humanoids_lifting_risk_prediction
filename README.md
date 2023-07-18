@@ -65,13 +65,70 @@ git clone https://github.com/ami-iit/paper_Guo_2023_Humanoid_Action_Recognition_
 
 ### Running
 #### :hammer: Offline annotation and training
-
+To annotate the data, one may follow the instructions below:
+- Launch the [yarpserver](https://www.yarp.it//v3.5/yarpserver.html): 
+```
+yarpserver --write
+```
+- Run [yarpdataplayer](https://www.yarp.it/latest/group__yarpdataplayer.html) with: 
+```
+yarpdataplayer --withExtraTimeCol 2
+```
+- Go to `~/robotology-superbuild/src/HumanDynamicsEstimation/conf/xml` and run the configuration file (in case full joints list use [`Human.xml`](https://github.com/robotology/human-dynamics-estimation/blob/master/conf/xml/Human.xml), in case reduced joints list use [`HumanStateProvider_ifeel_0.xml`](https://github.com/ami-iit/component_ergocub/blob/main/software/experiments/2022_04_Aereoporti_Roma/conf/HumanStateProvider_ifeel_0.xml)):
+```
+yarprobotinterface --config proper-configuration-file.xml
+```
+- Before going to `~/element_human-action-intention-recognition/build/install/bin`, be sure in the  virtual environment previsouly installed, then you may run (make sure all parameters in [humanDataAcquisition.ini](https://github.com/ami-iit/element_human-action-intention-recognition/blob/cheng_CleanUpCode/code/modules/humanMotionDataAcquisition/app/robots/humanDataAcquisition.ini) are set properly):
+```
+./humanDataAcquisitionModule --from humanDataAcquisition.ini
+```
+- To start annotation you may need to visualize the human model by running (also be sure the parameters setting in [HumanPredictionVisualizer.ini](https://github.com/ami-iit/element_human-action-intention-recognition/blob/cheng_CleanUpCode/code/modules/humanPredictionVisualizer/app/robots/HumanPredictionVisualizer.ini) are correct):
+```
+./HumanPredictionVisualizer --from HumanPredictionVisualizer.ini
+```
+Recalling the index of each action defined [here](https://github.com/ami-iit/element_human-action-intention-recognition/blob/cheng_CleanUpCode/code/modules/humanMotionDataAcquisition/app/robots/humanDataAcquisition.ini#L55), one can annotate the data manually. 
 #### :hammer: Test on recorded data
-
+- First of all, make sure [yarpserver](https://www.yarp.it//v3.5/yarpserver.html) is running.
+- Open [yarpdataplayer](https://www.yarp.it/latest/group__yarpdataplayer.html) to replay data.
+- Go to `~/robotology-superbuild/src/HumanDynamicsEstimation/conf/xml` and run [configuration file](https://github.com/ami-iit/component_ergocub/blob/main/software/experiments/2022_04_Aereoporti_Roma/conf/HumanStateProvider_ifeel_0.xml) (for 31 reduced joints DoF) with:
+```
+yarprobotinterface --config configuration_file_name.xml
+```
+- Then go to `~/element_human-action-intention-recognition/build/install/bin` and run:
+```
+./humanDataAcquisitionModule --from humanDataStreamingOnlineTest.ini
+```
+- (Remember be in virtual environment) Go to `~/element_human-action-intention-recognition` and run:
+```
+python3 ./scripts/MoE/main_test_moe.py
+```
+- (Remember be in virtual environment) Additional: for displaying the action recognition/motion prediction results, go to `~/element_human-action-intention-recognition_modified/scripts/MoE` and run:
+```
+bash ./runAnimators.sh
+```
+- Additional: for visualizing simulated human models, go to `~/element_human-action-intention-recognition_modified/build/install/bin` and run:
+```
+./HumanPredictionVisualizer --from HumanPredictionVisualizer.ini
+```
+- Additional: in case calibrating the simulated model, download the file [here](https://github.com/ami-iit/component_ergocub/blob/main/software/experiments/2022_04_Aereoporti_Roma/scripts/TPoseCalibration.sh) and run it when human model is in `T-pose`(you can stop the `yarpdataplayer` first when calibrating, afterwards replay it again):
+```
+bash ./TPoseCalibration.sh zero
+```
+- Go to `~/element_risk-prediction` and run:
+```
+python3 ./src/main_model_based_risk_evaluation.py
+```
+- To start NIOSH-based ergonomics evaluation module, run:
+```
+python3 ./src/niosh_method/nioshOnlineEasyUse.py
+```
+- To display ergonomics evaluation results, go to `~/element_risk-prediction/src/niosh_method` and run:
+```
+bash ./runAnimators.sh
+```
 
 #### :hammer: Online inference
-
-
+Under construction, for the moment one may follow the instructions [here](https://github.com/ami-iit/component_ergocub/issues/145).
 
 
 ### Maintainer
