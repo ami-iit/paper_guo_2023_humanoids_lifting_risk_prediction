@@ -9,6 +9,7 @@ Cheng Guo, Lorenzo Rapetti, Kourosh Darvish, Riccardo Grieco, Francesco Draicchi
 
 </div>
 
+
 <div align="center">
 
   
@@ -24,23 +25,32 @@ https://github.com/ami-iit/paper_Guo_2023_Humanoid_Action_Recognition_For_Risk_P
 
 
 <div align="center">
+  <a href="#data"><b>Data</b></a> |
+  <a href="#dependencies"><b>Dependencies</b></a> |
   <a href="#installation"><b>Installation</b></a> |
   <a href="#running"><b>Running</b></a> |
   <a href="http://dx.doi.org/10.1093/ajae/aaq063"><b>Paper</b></a> |
   <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><b>Video</b></a>
 </div>
 
+### Data
+Data and models can be provided on request.
+
+### Dependencies
+#### Required
+- [**YARP**](https://github.com/robotology/yarp): a library and toolkit for communication and device interfaces.
+- [**YCM**](https://github.com/robotology/ycm): a set of CMake files that support creation and maintenance of repositories and software packages
+- [**CMake**](https://cmake.org/download/): an open-source, cross-platform family of tools designed to build, test and package software.
+- [**HDE**](https://github.com/robotology/human-dynamics-estimation/blob/master/README.md): a collection of YARP devices for the online estimation of the kinematics and dynamics of a human subject.
+#### Optional
+- [**iDynTree**](https://github.com/robotology/idyntree): a library of robots dynamics algorithms for control, estimation and simulation.
+- [**Wearables**](https://github.com/robotology/wearables): a library for communication and interfaces with wearable sensors.
+- [**iFeel**](https://github.com/ami-iit/component_ifeel): a wearable perception system providing kinematic (position and velocities) and dynamic human information.
+
 ### Installation
 
-_Description of how to install the software and run the software to produce the plots and images in the paper. Both the installation process and the processing run should require as less user input as possible (ideally, none)._
 
-_Ideally the installation should be reproducible also in the future. Some basic guidelines to do this are:_
- 
-- _If you are using dependencies provided by apt, specify the stable apt distribution you used for your tests,_
-- _if you are using a rolling release distro such as PyPI or conda-forge, pin all your dependencies, i.e. explicitly specify their versions,_
-- _if you download a dependency as a git repo, specify the tag or commit to use_
 
-_For more info, check [the documentation available in this repo](example_details.md#reproducible-installation)._
 
 
 ### Running
@@ -50,7 +60,7 @@ _For more info, check [the documentation available in this repo](example_details
 
 If you find the work useful, please consider citing:
 
-```bibtex
+```BibTeX
 @ARTICLE{guo2023action,
   author={Cheng Guo, Lorenzo Rapetti, Kourosh Darvish, Riccardo Grieco, Francesco Draicchio and Daniele Pucci},
   booktitle={2023 IEEE IEEE-RAS International Conference on Humanoid Robots (Humanoids)},
