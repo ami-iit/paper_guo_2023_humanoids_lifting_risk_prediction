@@ -47,13 +47,30 @@ Data and models can be provided on request.
 - [**Wearables**](https://github.com/robotology/wearables): a library for communication and interfaces with wearable sensors.
 - [**iFeel**](https://github.com/ami-iit/component_ifeel): a wearable perception system providing kinematic (position and velocities) and dynamic human information.
 
+:fire: Ubuntu 20.04.5 LTS (Focal Fossa) is used in this project.
+
 ### Installation
+#### Install robotology-superbuild
+
+#### Install HDE
+
+#### Install iFeel (optional) 
+
+#### Install ergoCub (optional) 
+
+#### Install this project
 
 
 
 
 
 ### Running
+#### Offline annotation and training
+
+#### Test on recorded data
+
+
+#### Online inference
 
 
 ### Citing this work
