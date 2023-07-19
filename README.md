@@ -12,14 +12,17 @@ Cheng Guo, Lorenzo Rapetti, Kourosh Darvish, Riccardo Grieco, Francesco Draicchi
 
 <div align="center">
 
-  
-https://github.com/ami-iit/paper_Guo_2023_Humanoid_Action_Recognition_For_Risk_Prediction/assets/52885318/91d65383-5a9f-4169-8811-c19fe094e0c1
+
+
+https://github.com/ami-iit/paper_Guo_2023_Humanoid_Action_Recognition_For_Risk_Prediction/assets/52885318/7200df81-d918-4133-ab9e-b0bae716360e
+
+
 
 </div>
 
 <div align="center">
   
-2023 IEEE IEEE-RAS International Conference on Humanoid Robots (Humanoids)
+2023 IEEE-RAS International Conference on Humanoid Robots (Humanoids)
 
 </div>
 
