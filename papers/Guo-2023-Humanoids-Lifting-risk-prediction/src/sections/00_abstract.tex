@@ -1,0 +1,11 @@
+% precise overview of the whole paper
+This paper proposes a framework that combines online human state estimation, action recognition and motion prediction to enable early assessment and prevention of worker biomechanical risk during lifting tasks. The framework leverages the NIOSH index to perform online risk assessment, thus fitting real-time applications. In particular, the human state is retrieved via inverse kinematics/dynamics algorithms from wearable sensor data. Human action recognition and motion prediction are achieved by implementing an LSTM-based \emph{Guided Mixture of Experts} architecture, which is trained offline and inferred online. With the recognized actions, a single lifting activity is divided into a series of continuous movements and the \emph{Revised NIOSH Lifting Equation} can be applied for risk assessment. Moreover, the predicted motions enable anticipation of future risks. A haptic actuator, embedded in the wearable system, can alert the subject of potential risk, 
+acting as an active prevention device. The performance of the proposed framework is validated by executing real lifting tasks, while the subject is equipped with the iFeel wearable system. The source code for this paper is available at \href{https://github.com/ami-iit/paper_guo_2023_humanoids_lifting_risk_prediction}{$https://github.com/ami-iit/paper \textunderscore guo \textunderscore 2023 \textunderscore humanoids \textunderscore lifting \textunderscore risk \textunderscore prediction$}.
+
+
+%for each movement period. 
+% Moreover, the predicted motions lead to estimates of 
+% %are used at each moment to compute 
+% potential future risks. Risk prevention is then achieved 
+% %To make human aware of possible risks, 
+% with haptic feedback thanks to actuators inside the wearable system. The performance of the proposed framework is validated by experiments simulating a real-time lifting scenario.

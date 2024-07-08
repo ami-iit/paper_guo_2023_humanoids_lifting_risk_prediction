@@ -1,0 +1,56 @@
+
+\section{BACKGROUND}
+\label{sec:background}
+\subsection{Wearable System}
+% explain iFeel suits and force-torque sensing
+Sensing technologies are used to collect inputs from the environment by measuring physical quantities. In this research, we employed \emph{iFeel}\footnote{\href{https://ifeeltech.eu/}{$https://ifeeltech.eu/$}}, a wearable sensors system developed at Istituto Italiano di Tecnologia (IIT) to monitor human states and provide responses \cite{sortino2023}. The system integrates both motion capture and force/torque sensing. Motion capture aims at tracking and recording the motion, based on IMU sensors. IMUs ensure high-frequency data and low latency, making \emph{iFeel} suitable for real-time motion tracking. F/T sensors are used for measuring and regulating contact forces/torques when interacting with the environment. 
+
+\subsection{Human Modeling and State Estimation}
+\label{sec:human_modeling_estimation}
+% explain human modeling for both HDE and GMoE
+The human is modeled as a floating-base multi-rigid-body dynamic system \cite{Latella2019}. The system configuration is represented by $q = (q_b, s)$, where $q_b$ implies the floating-base pose (position and orientation) w.r.t. the inertial frame $\mathcal{I}$ and $s$ is the joint position vector. The system velocity and acceleration are denoted by ${\nu}$ and $\dot{\nu}$ respectively. The n+6 equations describing human motion with $n_c$ applied external wrenches is \cite{Kourosh2022}:
+\begin{equation}\label{human_dynamics}
+    M(q)\dot{\nu} + C(q, \nu)\nu + g(q) = B\tau + \displaystyle\sum_{k=1}^{n_c} {J_{k}^{T}(q) f_{k}^{c}},
+\end{equation}
+where $M(q)$ and $C(q, v)$ represent respectively the mass and Coriolis effect matrix. $g(q)$ is the vector of the gravitational term. $B$ is a selector matrix for joint torques $\tau$. $J_{k}$ is the \emph{Jacobian} mapping the system velocity with the \emph{k-th} link velocity that is associated with the external wrench $f_{k}^{c}$. $n$ indicates the number of joints.
+
+% explain IK/ID estimation
+To estimate in real time the system configuration $q$ and its velocity $\nu$, a \emph{dynamical inverse kinematics optimization} approach is proposed in \cite{Rapetti2020}. The idea is to minimize the distance between the computed state configuration $(q(t), \nu(t))$ with the target measurements. First, the measured velocity is corrected using a rotation matrix. Then, to compute the state velocity, the constrained inverse differential kinematics for the corrected velocity vector is solved as a QP optimization problem. At last, the state velocity is integrated to obtain the configuration $q(t)$. For the base estimation, force/torque measurements are applied to determine the location of contacts. Then base estimation can be solved as part of the \emph{dynamical inverse kinematics framework} \cite{Ramadoss2022}.
+
+In \cite{Latella2019}, the estimation of the human dynamics is performed by means of a Maximum-A-Posteriori (MAP) algorithm. The overall system dynamics can be reshaped to an equivalent compact matrix form. In this (Gaussian) domain, the vector of human kinematics/dynamics quantities can be regarded as stochastic variables. Given the measurement reliability, the solution is computed by maximizing the probability of this kinematics/dynamics vector.  
+
+\subsection{Guided Mixture of Experts}
+% explain the idea and architecture of GMoE
+The problem of simultaneous human action recognition and motion prediction is solved jointly by GMoE,  a learning-based approach proposed in \cite{Kourosh2022}. Given the past human states $x_{k-i}$, external forces $f_{k-i}^c$ and hidden states $r_{k-i}$, the next optimal human state $x_{k+1}^{*}$ can be formulated as:
+\begin{equation}\label{mapping_func}
+    x_{k+1}^{*} = \mathcal{H}^{*}(x_k,..., x_{k-N}, f_k^c,..., f_{k-N}^c, r_k,..., r_{k-N}),
+\end{equation}
+where the optimal mapping $\mathcal{H}^{*}$ is learned from human demonstration. By recursively applying equation (\ref{mapping_func}), we can predict the future human states for the time horizon T.
+
+In terms of $r_{k-i}$, we only consider human symbolic actions as the hidden states for simplification and estimate it as a classification problem. Hence, equation (\ref{mapping_func}) can be further rearranged as:
+\begin{subequations}
+\begin{align} \label{action_prediction}
+&\tilde{a}_{k+1} = \mathcal{D}_1^*(x_k, ..., x_{k-N}, f_k^c, ..., f_{k-N}^c) ~,\\
+\label{motion_prediction}
+&\tilde{x}_{k+1}, \tilde{f}_{k+1}^c  = \mathcal{D}_2^*(x_k, ..., x_{k-N}, f_k^c, ..., f_{k-N}^c, \tilde{a}_{k+1}) ~.
+\end{align}
+\end{subequations}
+where $\tilde{a}_{k+1}$ denotes the estimated human next action, $\mathcal{D}_1^*$ and $\mathcal{D}_2^*$ are two optimal mappings to learn.
+
+Integrating the idea of Mixture of Experts (MoE), the \emph{gating network} is guided to learn mapping $\mathcal{D}_1^*$ as a classification problem for recognizing human actions, while each \emph{expert network} learns $\mathcal{D}_2^*$ as a regression problem to predict human motions associated with each specific action.
+
+\subsection{Revised NIOSH Lifting Equation}
+\label{sec:RNLE}
+% explain RNLE 
+The \emph{Revised NIOSH Lifting Equation} (RNLE) consists of the following two empirical equations:
+\begin{subequations}
+\begin{align} \label{RWL_eqa}
+&\text{RWL} = \text{LC}\cdot\text{HM}\cdot\text{VM}\cdot\text{DM}\cdot\text{AM}\cdot\text{FM}\cdot\text{CM} ~,\\
+\label{RI_eqa}
+&\text{LI} = \text{$W_{payload}$} / \text{RWL} ~.
+\end{align}
+\end{subequations}
+
+Equation (\ref{RWL_eqa}) determines a \emph{Recommended Weight Limit} (RWL) for a specific task. Each factor in the equation is either from a qualitative assessment or from geometrical measurements weighted by a multiplier. More precisely, \emph{LC} is the load constant (23kg), \emph{HM} is the horizontal multiplier, \emph{VM} is the vertical multiplier, \emph{DM} is the vertical traveling distance multiplier, \emph{AM} is the asymmetry multiplier, \emph{FM} is the frequency multiplier and \emph{CM} is the coupling multiplier. 
+
+The \emph{Lifting Index} (LI) provides an estimate of the physical stress level, which is obtained in equation (\ref{RI_eqa}) by dividing the payload weight \emph{$W_{payload}$} by the recommended weight limit. A LI smaller than 1.0 implies a safe condition for working healthy employees, while a higher value of LI denotes an increasing risk of work-related injuries. 

@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+%In case you encounter the following error:
+%Error 1010 The PDF file may be corrupt (unable to open PDF file) OR
+%Error 1000 An error occurred while parsing a contents stream. Unable to analyze the PDF file.
+%This is a known problem with pdfLaTeX conversion filter. The file cannot be opened with acrobat reader
+%Please use one of the alternatives below to circumvent this error by uncommenting one or the other
+%\pdfobjcompresslevel=0
+\pdfminorversion=4
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{mathtools,amsfonts,amssymb,bm}
+\usepackage{hyperref}
+\usepackage[demo]{graphicx}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{cite}
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\newcommand\LorenzoSays[1]{\textcolor{red}{#1}} 
+
+\title{\LARGE \bf
+Online Action Recognition for Human Risk Prediction \\ with Anticipated Haptic Alert via Wearables
+}
+% Dani: keep the title like this
+
+\author{Cheng Guo$^{1,2}$, Lorenzo Rapetti$^{1}$, Kourosh Darvish$^{3}$, Riccardo Grieco$^{1}$, Francesco Draicchio$^{4}$, Daniele Pucci$^{1,2}$% <-this % stops a space
+\thanks{*This work was supported by the Italian National Institute for Insurance against Accidents at Work (INAIL) ergoCub Project.}% <-this % stops a space
+\thanks{$^{1}$Artificial and Mechanical Intelligence at Istituto Italiano di Tecnologia, Center for Robotics Technologies, Genova, Italy. 
+        email: {\tt\small { firstname.lastname@iit.it}}}%
+\thanks{$^{2}$School of Computer Science, The University of Manchester, Manchester, United Kingdom.}%
+\thanks{$^{3}$University of Toronto, Toronto, Ontario, Canada.}%
+\thanks{$^{4}$Department of Occupational and Environmental Medicine, Epidemiology and Hygiene, INAIL, Rome, Italy.}%
+}
+
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+\input{sections/00_abstract}
+%Precise and short summary of the whole paper
+
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{sections/01_introduction}
+\input{sections/02_background}
+\input{sections/03_methods}
+\input{sections/04_validation}
+\input{sections/05_conclusions}
+
+%\section{INTRODUCTION}
+%\section{BACKGROUND}
+%\section{METHOD}
+%\section{VALIDATION}
+%\section{CONCLUSIONS}
+
+%\addtolength{\textheight}{-12cm}   % This command serves to balance the column lengths
+                                  % on the last page of the document manually. It shortens
+                                  % the textheight of the last page by a suitable amount.
+                                  % This command does not take effect until the next page
+                                  % so it should come on the page before the last. Make
+                                  % sure that you do not shorten the textheight too much.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section*{APPENDIX}
+
+
+%\section*{ACKNOWLEDGMENT}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+
+\end{document}
